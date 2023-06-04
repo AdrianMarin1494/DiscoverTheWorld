@@ -56,6 +56,10 @@ const CountriesData = () => {
                 countryName={countryDetails[0]["name"]["common"]}
                 capitalName={countryDetails[0]["capital"][0]}
                 regionName={countryDetails[0]["region"]}
+                borders={countryDetails[0]["borders"] ? `${countryDetails[0]["borders"].map(item => item)}` : "No data"}
+                languages={
+                    `${Object.values(countryDetails[0]["languages"]).map(item => item)}`
+                }
                 onClose={() => setCountryDetails("")}
             />}
             <ul>
