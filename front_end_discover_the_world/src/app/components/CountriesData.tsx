@@ -38,16 +38,11 @@ const CountriesData = () => {
     const countiresList = filteredCountries.map(item => (
         <li 
             key={item}
-            // onClick={() => setSelectedCountry(item)}
             onClick={() => setCountryDetails(data.filter(i => i["name"]["common"] === item))}
         >
             {item}
         </li>
         ));
-    // useEffect(() => {
-    //     console.log(data.filter(item => item["name"]["common"] === selectedCountry));
-    //     setCountryDetails(data.filter(item => item["name"]["common"] === selectedCountry));
-    // }, [selectedCountry]);
     console.log(countryDetails)
     
     return (
@@ -57,7 +52,6 @@ const CountriesData = () => {
                 ref={userInput} 
                 onChange={filterData}
             />
-            {/* {selectedCountry && <DetailsModal countryName={selectedCountry} onClose={() => setSelectedCountry("")} />} */}
             {countryDetails[0] && <DetailsModal 
                 countryName={countryDetails[0]["name"]["common"]} 
                 onClose={() => setCountryDetails("")}
