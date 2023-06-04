@@ -53,7 +53,9 @@ const CountriesData = () => {
                 onChange={filterData}
             />
             {countryDetails[0] && <DetailsModal 
-                countryName={countryDetails[0]["name"]["common"]} 
+                countryName={countryDetails[0]["name"]["common"]}
+                capitalName={countryDetails[0]["capital"][0]}
+                regionName={countryDetails[0]["region"]}
                 onClose={() => setCountryDetails("")}
             />}
             <ul>

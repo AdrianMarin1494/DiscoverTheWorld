@@ -10,7 +10,9 @@ const DetailsModal = (props) => {
             "zIndex": "100px", 
             "backgroundColor": "grey"
         }}>
-            <h3>{props.countryName}</h3>
+            <h3>Country: {props.countryName}</h3>
+            <h3>The Capital is {props.capitalName}</h3>
+            <h3>It is located on {props.regionName}</h3>
             <button onClick={props.onClose}>Close</button>
         </div>
     );
