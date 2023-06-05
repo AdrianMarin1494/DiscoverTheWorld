@@ -11,6 +11,7 @@ const CountriesData = () => {
     const [filteredCountries, setFilteredCountries] = useState([]);
     const [countryDetails, setCountryDetails] = useState([]);
     const userInput = useRef();
+    const selectedRegion = useRef();
 
     useEffect(() => {
         const fetchData = async() => {
@@ -35,6 +36,15 @@ const CountriesData = () => {
         let searchingWord = userInput.current.value
         setFilteredCountries(countries.filter(country => country.includes(searchingWord)))
     }
+    function filterCountriesByRegion() {
+        console.log(data);
+        // const dataFilteredByRegion = data.filter(item => item["continents"][0] === selectedRegion.current.value);
+        const dataFilteredByRegion = data.filter(item => item["region"].includes(selectedRegion.current.value));
+        const countriesFilteredByRegion = dataFilteredByRegion.map(item => item["name"]["common"])
+        console.log(selectedRegion.current.value);
+        console.log(countriesFilteredByRegion);
+        setFilteredCountries(countriesFilteredByRegion);
+    }
     const countiresList = filteredCountries.map(item => (
         <li 
             key={item}
@@ -44,9 +54,21 @@ const CountriesData = () => {
         </li>
         ));
     console.log(countryDetails)
+
+
     
     return (
         <div>
+            <label htmlFor="filter-by-region">Select Region</label>
+            <select id="filter-by-region" onChange={filterCountriesByRegion} ref={selectedRegion}>
+                <option value="">All</option>
+                <option value="Africa">Africa</option>
+                <option value="Americas">Americas</option>
+                <option value="Antarctic">Antartic</option>
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europe</option>
+                <option value="Oceania">Oceania</option>
+            </select>
             <input 
                 type="text" 
                 ref={userInput} 

@@ -3,14 +3,14 @@
 import React from "react";
 
 import styles from './page.module.css'
-import CountriesData from "./components/CountriesData";
-
+import MainPage from "./pages/MainPage";
+import CountriesPage from "./pages/CountriesPage";
 
 export default function Home() {
 
   return (
     <main className={styles.main}>
-      <CountriesData />
+      <CountriesPage />
     </main>
   )
 }
