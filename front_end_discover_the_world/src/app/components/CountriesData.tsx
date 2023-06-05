@@ -38,11 +38,8 @@ const CountriesData = () => {
     }
     function filterCountriesByRegion() {
         console.log(data);
-        // const dataFilteredByRegion = data.filter(item => item["continents"][0] === selectedRegion.current.value);
         const dataFilteredByRegion = data.filter(item => item["region"].includes(selectedRegion.current.value));
         const countriesFilteredByRegion = dataFilteredByRegion.map(item => item["name"]["common"])
-        console.log(selectedRegion.current.value);
-        console.log(countriesFilteredByRegion);
         setFilteredCountries(countriesFilteredByRegion);
     }
     const countiresList = filteredCountries.map(item => (
@@ -54,12 +51,10 @@ const CountriesData = () => {
         </li>
         ));
     console.log(countryDetails)
-
-
     
     return (
         <div>
-            <label htmlFor="filter-by-region">Select Region</label>
+            <label htmlFor="filter-by-region">Select the continent</label>
             <select id="filter-by-region" onChange={filterCountriesByRegion} ref={selectedRegion}>
                 <option value="">All</option>
                 <option value="Africa">Africa</option>
@@ -69,7 +64,10 @@ const CountriesData = () => {
                 <option value="Europe">Europe</option>
                 <option value="Oceania">Oceania</option>
             </select>
-            <input 
+            <br />
+            <label htmlFor="search-country">Search country</label>
+            <input
+                id="search-country"
                 type="text" 
                 ref={userInput} 
                 onChange={filterData}
@@ -82,6 +80,8 @@ const CountriesData = () => {
                 languages={
                     `${Object.values(countryDetails[0]["languages"]).map(item => item)}`
                 }
+                flag={countryDetails[0]["flag"]}
+                map={countryDetails[0]["maps"]["googleMaps"]}
                 onClose={() => setCountryDetails("")}
             />}
             <ul>
