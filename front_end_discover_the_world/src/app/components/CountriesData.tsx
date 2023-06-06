@@ -12,6 +12,7 @@ const CountriesData = () => {
     const [countryDetails, setCountryDetails] = useState([]);
     const userInput = useRef();
     const selectedRegion = useRef();
+    const selectedLanguage = useRef();
 
     useEffect(() => {
         const fetchData = async() => {
@@ -41,7 +42,20 @@ const CountriesData = () => {
         const dataFilteredByRegion = data.filter(item => item["region"].includes(selectedRegion.current.value));
         const countriesFilteredByRegion = dataFilteredByRegion.map(item => item["name"]["common"])
         setFilteredCountries(countriesFilteredByRegion);
-    }
+    };
+    function filterCountriesByLanguage() {
+        const dataFilteredByLanguage = data.filter(item => {
+            if (selectedLanguage.current.value === "") {
+                return true;
+            }
+            if ("languages" in item) {
+              return Object.values(item["languages"]).includes(selectedLanguage.current.value);
+            }
+            return false; // Skip items that don't have the "languages" key
+          });
+        const countriesFilteredByLanguage= dataFilteredByLanguage.map(item => item["name"]["common"])
+        setFilteredCountries(countriesFilteredByLanguage);
+    };
     const countiresList = filteredCountries.map(item => (
         <li 
             key={item}
@@ -63,6 +77,15 @@ const CountriesData = () => {
                 <option value="Asia">Asia</option>
                 <option value="Europe">Europe</option>
                 <option value="Oceania">Oceania</option>
+            </select>
+            <br />
+            <label htmlFor="filter-by-language">Select a language</label>
+            <select id="filter-by-lanaguage" onChange={filterCountriesByLanguage} ref={selectedLanguage}>
+                <option value="">All</option>
+                <option value="English">English</option>
+                <option value="French">French</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Arabic">Arabic</option>
             </select>
             <br />
             <label htmlFor="search-country">Search country</label>

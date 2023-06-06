@@ -11,9 +11,9 @@ const DetailsModal = (props) => {
             "zIndex": "100px", 
             "backgroundColor": "grey"
         }}>
-            <h3>Country: {props.countryName} {props.flag}</h3>
-            <h3>The Capital is {props.capitalName}</h3>
-            <h3>It is located on {props.regionName} Continent</h3>
+            <h3>{props.countryName} {props.flag}</h3>
+            <p>The Capital is {props.capitalName}</p>
+            <p>It is located on {props.regionName} Continent</p>
             <p>Borders: {props.borders}</p>
             <p>Languages spoken: {props.languages}</p>
             <a href={props.map} target="_blank">Click to see the map</a>
