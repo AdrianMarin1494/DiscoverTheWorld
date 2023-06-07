@@ -10,6 +10,7 @@ const CountriesData = () => {
     const [countries, setCountries] = useState([]);
     const [filteredCountries, setFilteredCountries] = useState([]);
     const [countryDetails, setCountryDetails] = useState([]);
+    const [isSortingDescending, setIsSortingDescending] = useState(true);
     const userInput = useRef();
     const selectedRegion = useRef();
     const selectedLanguage = useRef();
@@ -56,6 +57,14 @@ const CountriesData = () => {
         const countriesFilteredByLanguage= dataFilteredByLanguage.map(item => item["name"]["common"])
         setFilteredCountries(countriesFilteredByLanguage);
     };
+    function sortHandler() {
+            const ascendingSorting = [...countries].sort();
+        if (isSortingDescending) {
+            ascendingSorting.reverse();
+        }
+        setFilteredCountries(ascendingSorting);
+        setIsSortingDescending(prevState => !prevState);
+    }
     const countiresList = filteredCountries.map(item => (
         <li 
             key={item}
@@ -95,6 +104,8 @@ const CountriesData = () => {
                 ref={userInput} 
                 onChange={filterData}
             />
+            <br />
+            <button onClick={sortHandler}>{isSortingDescending ? "Sort Asc" : "Sort Desc"}</button>
             {countryDetails[0] && <DetailsModal 
                 countryName={countryDetails[0]["name"]["common"]}
                 capitalName={countryDetails[0]["capital"][0]}
