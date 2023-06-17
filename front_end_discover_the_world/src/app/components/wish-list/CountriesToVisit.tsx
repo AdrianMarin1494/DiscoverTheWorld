@@ -19,8 +19,11 @@ const CountriesToVisit = () => {
     
     
     const handleAddCountry = () => {
+        let newCountriesList = {...countreisToVisit}
         let newCountry = inputCountry.current.value;
-        setCountriesToVisit(prevCountries => { return {...prevCountries, newCountry: newCountry}});
+        newCountriesList[newCountry] = newCountry;
+        console.log(newCountriesList);
+        setCountriesToVisit(newCountriesList);
     };
     const countriesList = Object.values(countreisToVisit).map((country) => <li key={country}>{country}</li>)
     
