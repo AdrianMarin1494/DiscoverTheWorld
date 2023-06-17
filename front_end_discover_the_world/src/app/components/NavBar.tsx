@@ -32,6 +32,7 @@ const NavBar = ({onSelectPage}) => {
                 <select onChange={handleSelectPage} ref={selectedPage}>
                     <option value="MainPage">Main Page</option>
                     <option value="CountriesPage">Countries Page</option>
+                    <option value="WishListPage">Wish list Page</option>
                 </select>
             </div>
         </nav>
