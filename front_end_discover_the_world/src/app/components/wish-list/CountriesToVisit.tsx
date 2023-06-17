@@ -3,16 +3,27 @@
 import React, {useState, useEffect, useRef} from "react";
 
 const CountriesToVisit = () => {
-    const [countreisToVisit, setCountriesToVisit] = useState([]);
+    const [countreisToVisit, setCountriesToVisit] = useState({});
     let inputCountry = useRef("");
 
-    const countriesList = countreisToVisit.map((country) => <li key={country}>{country}</li>)
-
+    useEffect(() => {
+        async function getCountriesData() {
+            const res = await fetch("https://discovertheworld-b4978-default-rtdb.europe-west1.firebasedatabase.app/.json");
+            const data = await res.json();
+            console.log(data);
+            setCountriesToVisit(data);
+        }
+        getCountriesData();
+    }, []);
+    console.log(countreisToVisit);
+    
+    
     const handleAddCountry = () => {
-        console.log(inputCountry.current.value);
-        setCountriesToVisit(prevCountries => [...prevCountries, inputCountry.current.value]);
+        let newCountry = inputCountry.current.value;
+        setCountriesToVisit(prevCountries => { return {...prevCountries, newCountry: newCountry}});
     };
-
+    const countriesList = Object.values(countreisToVisit).map((country) => <li key={country}>{country}</li>)
+    
     return (
         <div>
             <label htmlFor="add-country">Add a country to your wishlist</label>
