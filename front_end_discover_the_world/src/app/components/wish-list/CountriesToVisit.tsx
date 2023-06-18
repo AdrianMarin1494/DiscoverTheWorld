@@ -17,13 +17,22 @@ const CountriesToVisit = () => {
     }, []);
     console.log(countreisToVisit);
     
-    
-    const handleAddCountry = () => {
+    const handleAddCountry = async () => {
         let newCountriesList = {...countreisToVisit}
         let newCountry = inputCountry.current.value;
         newCountriesList[newCountry] = newCountry;
         console.log(newCountriesList);
         setCountriesToVisit(newCountriesList);
+        try {
+            const sendData = await fetch("https://discovertheworld-b4978-default-rtdb.europe-west1.firebasedatabase.app/.json",
+                {
+                    method: "PUT",
+                    body: JSON.stringify(newCountriesList)
+                }
+            );
+        } catch (error) {
+            console.log(error);
+        }
     };
     const countriesList = Object.values(countreisToVisit).map((country) => <li key={country}>{country}</li>)
     
