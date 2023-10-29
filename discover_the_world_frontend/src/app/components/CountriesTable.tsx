@@ -15,6 +15,7 @@ const CountriesTable = () => {
                         <tr key={country["name"]["common"]}>
                             <td>{country["name"]["common"]}</td>
                             <td>{country["region"]}</td>
+                            <td>{country["subregion"]}</td>
                         </tr>
                     );
                 })
@@ -35,8 +36,8 @@ const CountriesTable = () => {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Capital</th>
                         <th>Region</th>
+                        <th>Subregion</th>
                     </tr>
                 </thead>
                 <tbody>
