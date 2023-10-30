@@ -14,8 +14,10 @@ const CountriesTable = () => {
                     return (
                         <tr key={country["name"]["common"]}>
                             <td>{country["name"]["common"]}</td>
+                            {country["capital"] !== undefined ? <td>{country["capital"][0]}</td> : <td>No info</td>}
                             <td>{country["region"]}</td>
                             <td>{country["subregion"]}</td>
+                            <td>{country["population"]}</td>
                         </tr>
                     );
                 })
@@ -36,8 +38,10 @@ const CountriesTable = () => {
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Capital</th>
                         <th>Region</th>
                         <th>Subregion</th>
+                        <th>Population</th>
                     </tr>
                 </thead>
                 <tbody>
