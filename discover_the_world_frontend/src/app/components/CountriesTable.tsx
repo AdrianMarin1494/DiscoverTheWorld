@@ -2,8 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 
-const CountriesTable = () => {
+interface CountriesTableProps {
+    onSelectedRow: (countryName: string) => void
+}
+
+const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
     const [countriesData, setCountriesData] = useState<any[] | null>(null);
+
+    function selectedRow(countryName: string) {
+        console.log(countryName);
+        onSelectedRow(countryName);
+    }
+
     async function getCountries() {
         try {
             const res: Response = await fetch("https://restcountries.com/v3.1/all");
@@ -12,7 +22,7 @@ const CountriesTable = () => {
             if (data) {
                 const listedData = data.map((country) => {
                     return (
-                        <tr key={country["name"]["common"]}>
+                        <tr key={country["name"]["common"]} onClick={() => selectedRow(country["name"]["common"])}>
                             <td>{country["name"]["common"]}</td>
                             {country["capital"] !== undefined ? <td>{country["capital"][0]}</td> : <td>No info</td>}
                             <td>{country["region"]}</td>
