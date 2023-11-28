@@ -3,15 +3,15 @@
 import React, { useEffect, useState } from "react";
 
 interface CountriesTableProps {
-    onSelectedRow: (countryName: string) => void
+    onSelectedRow: (countryName: string, countryMap: string) => void
 }
 
 const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
     const [countriesData, setCountriesData] = useState<any[] | null>(null);
 
-    function selectedRow(countryName: string) {
-        console.log(countryName);
-        onSelectedRow(countryName);
+    function selectedRow(countryName: string, countryMap: string) {
+        console.log(countryMap);
+        onSelectedRow(countryName, countryMap);
     }
 
     async function getCountries() {
@@ -22,7 +22,7 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
             if (data) {
                 const listedData = data.map((country) => {
                     return (
-                        <tr key={country["name"]["common"]} onClick={() => selectedRow(country["name"]["common"])}>
+                        <tr key={country["name"]["common"]} onClick={() => selectedRow(country["name"]["common"], country["maps"]["googleMaps"])}>
                             <td>{country["name"]["common"]}</td>
                             {country["capital"] !== undefined ? <td>{country["capital"][0]}</td> : <td>No info</td>}
                             <td>{country["region"]}</td>
