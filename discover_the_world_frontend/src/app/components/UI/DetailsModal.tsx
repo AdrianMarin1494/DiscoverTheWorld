@@ -1,9 +1,16 @@
 import React from "react";
 
+import classes from "./DetailsModal.module.css";
+
 const DetailsModal: React.FC<{countryName: string}> = ({countryName}) => {
     return (
-        <div style={{width: '150px', height: '150px', backgroundColor: 'blue'}}>
-            <h3>{countryName}</h3>
+        <div className={classes["container"]}>
+            <div className={classes["details"]}>
+                <h3>{countryName}</h3>
+            </div>
+            <div className={classes["actions"]}>
+                <button>Close</button>
+            </div>
         </div>
     );
 }
