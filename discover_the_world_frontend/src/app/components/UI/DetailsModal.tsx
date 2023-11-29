@@ -2,7 +2,14 @@ import React from "react";
 
 import classes from "./DetailsModal.module.css";
 
-const DetailsModal: React.FC<{countryName: string, onClose: () => void, seeCountryMap: string}> = ({countryName, onClose, seeCountryMap}) => {
+interface DetailsModalInterface {
+    countryName: string, 
+    onClose: () => void, 
+    seeCountryMap: string, 
+    seeStreetMap: string
+}
+
+const DetailsModal: React.FC<DetailsModalInterface> = ({countryName, onClose, seeCountryMap,  seeStreetMap}) => {
     function openLink(linkAddress: string): void {
         window.open(linkAddress, '_blank');
     }
@@ -14,7 +21,8 @@ const DetailsModal: React.FC<{countryName: string, onClose: () => void, seeCount
             </div>
             <div className={classes["actions"]}>
                 <button onClick={onClose}>Close</button>
-                <button onClick={() => openLink(seeCountryMap)}>See map</button>
+                <button onClick={() => openLink(seeCountryMap)}>GoogleMaps</button>
+                <button onClick={() => openLink(seeStreetMap)}>OpenStreetMap</button>
             </div>
         </div>
     );

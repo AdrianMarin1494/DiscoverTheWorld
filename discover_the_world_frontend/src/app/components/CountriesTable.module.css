@@ -1,0 +1,19 @@
+.countries-table {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+}
+
+.countries-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.countries-table tr:hover {
+    background-color: #ddd;
+}
+
+.countries-table td, 
+.countries-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}

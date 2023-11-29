@@ -2,16 +2,17 @@
 
 import React, { useEffect, useState } from "react";
 
+import classes from "./CountriesTable.module.css";
+
 interface CountriesTableProps {
-    onSelectedRow: (countryName: string, countryMap: string) => void
+    onSelectedRow: (countryName: string, countryMap: string, streetMap: string) => void
 }
 
 const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
     const [countriesData, setCountriesData] = useState<any[] | null>(null);
 
-    function selectedRow(countryName: string, countryMap: string) {
-        console.log(countryMap);
-        onSelectedRow(countryName, countryMap);
+    function selectedRow(countryName: string, countryMap: string, streetMap: string): void {
+        onSelectedRow(countryName, countryMap, streetMap);
     }
 
     async function getCountries() {
@@ -22,7 +23,8 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
             if (data) {
                 const listedData = data.map((country) => {
                     return (
-                        <tr key={country["name"]["common"]} onClick={() => selectedRow(country["name"]["common"], country["maps"]["googleMaps"])}>
+                        <tr key={country["name"]["common"]} 
+                            onClick={() => selectedRow(country["name"]["common"], country["maps"]["googleMaps"], country["maps"]["openStreetMaps"])}>
                             <td>{country["name"]["common"]}</td>
                             {country["capital"] !== undefined ? <td>{country["capital"][0]}</td> : <td>No info</td>}
                             <td>{country["region"]}</td>
@@ -43,7 +45,7 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
     }, []);
 
     return (
-        <div>
+        <div className={classes["countries-table"]}>
             <table>
                 <thead>
                     <tr>
