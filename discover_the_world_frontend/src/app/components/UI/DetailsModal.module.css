@@ -3,15 +3,44 @@
     width: 40vw;
     height: 40vh;
     top: 30%;
-    background-color: brown;
+    left: 30%;
+    background-color: #39395f;
     border-radius: 10px;
     padding: 5vw;
+    color: goldenrod;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
 }
 
 .details {
-    background-color: white;
+    padding: 5px;
 }
 
 .actions {
-    background-color: grey;
+    padding: 1px;
+}
+
+.actions button {
+    margin-left: 1vw;
+    border-radius: 3px;
+    padding: 3px;
+    cursor: pointer;
+    background-color: #484859;
+    box-shadow: 1px 1px 0px 0px #999;
+    color: goldenrod;
+    font-size: medium;
+}
+
+.actions button:hover {
+    background-color: #fffbf0;
+}
+
+.actions button:active {
+    background-color: #fffbf0;
+    box-shadow: 1px 1px 0px 0px #666;
+    transform: translateY(3px);
 }

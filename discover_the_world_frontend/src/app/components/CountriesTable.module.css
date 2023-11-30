@@ -1,15 +1,22 @@
 .countries-table {
-    background-color: green;
     display: flex;
     justify-content: center;
+    height: 90vh;
+    padding: 1.5vw;
+    overflow-y: auto;
 }
 
 .countries-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #416a59 ;
+}
+
+.countries-table tr:nth-child(odd) {
+    background-color: #73a24e;
 }
 
 .countries-table tr:hover {
-    background-color: #ddd;
+    background-color: #a9c25d;
+    cursor: pointer;
 }
 
 .countries-table td, 

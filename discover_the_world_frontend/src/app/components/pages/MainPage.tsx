@@ -12,11 +12,15 @@ const MainPage = () => {
     const [selectedCountryName, setSelectedCountryName] = useState<string>("");
     const [selectedCountryMap, setSelectedCountryMap] = useState<string>("");
     const [selectedStreetMap, setSelectedStreetMap] = useState<string>("");
+    const [selectedUnMember, setSelectedUnMember] = useState<string>("");
+    const [selectedArea, setSelectedArea] = useState<string>("");
 
-    function handleSelectedRow(countryName: string, countryMap: string, streetMap: string) {
+    function handleSelectedRow(countryName: string, countryMap: string, streetMap: string, unMember: string, area: string) {
         setSelectedCountryName(countryName);
         setSelectedCountryMap(countryMap);
         setSelectedStreetMap(streetMap);
+        setSelectedUnMember(unMember);
+        setSelectedArea(area);
         setIsShowingModal(true);
     }
 
@@ -33,6 +37,8 @@ const MainPage = () => {
                 onClose={handleClose} 
                 seeCountryMap={selectedCountryMap}
                 seeStreetMap={selectedStreetMap}
+                countryUnMember={selectedUnMember}
+                countryArea={selectedArea}
             />}
         </div>
     );
