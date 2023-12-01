@@ -1,8 +1,39 @@
+.countries-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.countries-actions {
+    display: flex;
+    margin: 0vh 0.2vw 0vh 0.2vw;
+}
+
+.countries-actions button {
+    margin-left: 1vw;
+    border-radius: 3px;
+    padding: 1px;
+    cursor: pointer;
+    background-color: #484859;
+    box-shadow: 1px 1px 0px 0px #999;
+    color: goldenrod;
+    font-size: medium;
+}
+
+.countries-actions button:hover {
+    background-color: #fffbf0;
+}
+
+.countries-actions button:active {
+    background-color: #fffbf0;
+    box-shadow: 1px 1px 0px 0px #666;
+    transform: translateY(3px);
+}
+
 .countries-table {
     display: flex;
     justify-content: center;
     height: 90vh;
-    padding: 1.5vw;
+    padding: 1vw;
     overflow-y: auto;
 }
 

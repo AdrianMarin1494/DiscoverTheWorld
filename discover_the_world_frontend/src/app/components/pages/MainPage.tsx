@@ -30,7 +30,7 @@ const MainPage = () => {
 
     return (
         <div className={classes["main-page"]}>
-            <h3 className={classes["title"]}>Main Page</h3>
+            <h3 className={classes["title"]}>Discover the Countries</h3>
             <CountriesTable onSelectedRow={handleSelectedRow}/>
             {isShowingModal && <DetailsModal 
                 countryName={selectedCountryName} 

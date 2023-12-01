@@ -65,6 +65,25 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
         setCountriesData(sortingData);
     }
 
+    function handleSortingByRegion() {
+        let sortingData = countriesData.sort((a, b) => {
+            const nameA = a["region"].toUpperCase();
+            const nameB = b["region"].toUpperCase();
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+            return 0;
+        })
+        if (!isSortingAscending) {
+            sortingData.reverse();
+        }
+        setIsSortingAscending(previous => !previous)
+        setCountriesData(sortingData);
+    }
+
     function handleSortingByPopulation() {
         let sortingData = countriesData.sort((a, b) => {
             return a["population"] - b["population"];
@@ -77,45 +96,47 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
     }
 
     return (
-        <div className={classes["countries-table"]}>
+        <div className={classes["countries-content"]}>
             <div className={classes["countries-actions"]}>
                 <button onClick={handleSortingByName}>Sort by Name</button>
-                <button onClick={handleSortingByPopulation}>Sort by population</button>
-                <button>Sort by region</button>
+                <button onClick={handleSortingByRegion}>Sort by Region</button>
+                <button onClick={handleSortingByPopulation}>Sort by Population</button>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Flag</th>
-                        <th>Name</th>
-                        <th>Capital</th>
-                        <th>Region</th>
-                        <th>Subregion</th>
-                        <th>Population</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {countriesData.map((country) => {
-                        return (
-                            <tr key={country["name"]["common"]} 
-                                onClick={() => selectedRow(
-                                    country["name"]["common"], 
-                                    country["maps"]["googleMaps"], 
-                                    country["maps"]["openStreetMaps"], 
-                                    country["unMember"],
-                                    country["area"],
-                                )}>
-                                <td><img src={country["flags"]["svg"]} style={{width: "2vw", height: "2vh"}}/></td>
-                                <td>{country["name"]["common"]}</td>
-                                {country["capital"] !== undefined ? <td>{country["capital"][0]}</td> : <td>No info</td>}
-                                <td>{country["region"]}</td>
-                                <td>{country["subregion"]}</td>
-                                <td>{country["population"]}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+            <div className={classes["countries-table"]}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Flag</th>
+                            <th>Name</th>
+                            <th>Capital</th>
+                            <th>Region</th>
+                            <th>Subregion</th>
+                            <th>Population</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {countriesData.map((country) => {
+                            return (
+                                <tr key={country["name"]["common"]} 
+                                    onClick={() => selectedRow(
+                                        country["name"]["common"], 
+                                        country["maps"]["googleMaps"], 
+                                        country["maps"]["openStreetMaps"], 
+                                        country["unMember"],
+                                        country["area"],
+                                    )}>
+                                    <td><img src={country["flags"]["svg"]} style={{width: "2vw", height: "2vh"}}/></td>
+                                    <td>{country["name"]["common"]}</td>
+                                    {country["capital"] !== undefined ? <td>{country["capital"][0]}</td> : <td>No info</td>}
+                                    <td>{country["region"]}</td>
+                                    <td>{country["subregion"]}</td>
+                                    <td>{country["population"]}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };
