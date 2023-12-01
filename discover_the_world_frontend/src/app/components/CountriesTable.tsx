@@ -46,7 +46,7 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
         );
     }
 
-    function handleSorting() {
+    function handleSortingByName() {
         let sortingData = countriesData.sort((a, b) => {
             const nameA = a["name"]["common"].toUpperCase();
             const nameB = b["name"]["common"].toUpperCase();
@@ -65,12 +65,23 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
         setCountriesData(sortingData);
     }
 
+    function handleSortingByPopulation() {
+        let sortingData = countriesData.sort((a, b) => {
+            return a["population"] - b["population"];
+        })
+        if (!isSortingAscending) {
+            sortingData.reverse();
+        }
+        setIsSortingAscending(previous => !previous)
+        setCountriesData(sortingData);
+    }
+
     return (
         <div className={classes["countries-table"]}>
             <div className={classes["countries-actions"]}>
-                <button onClick={handleSorting}>Sort by Name</button>
+                <button onClick={handleSortingByName}>Sort by Name</button>
+                <button onClick={handleSortingByPopulation}>Sort by population</button>
                 <button>Sort by region</button>
-                <button>Sort by population</button>
             </div>
             <table>
                 <thead>
