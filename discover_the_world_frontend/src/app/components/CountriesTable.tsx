@@ -10,8 +10,8 @@ interface CountriesTableProps {
 
 const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
     const [countriesData, setCountriesData] = useState<any[]>([]);
+    const [savedData, setSavedData] = useState<any[]>([]);
     const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
-    const [isDataChanging, setIsDataChanging] = useState<boolean>(false);
     const [isSortingAscending, setIsSortingAscending] = useState<boolean>(true);
 
     function selectedRow(countryName: string, countryMap: string, streetMap: string, unMember: string, area: string): void {
@@ -25,6 +25,7 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
             console.log(data);
             if (data) {
                 setCountriesData(data);
+                setSavedData(data);
                 setIsDataLoaded(true);
             }
         } catch (err) {
@@ -95,12 +96,34 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
         setCountriesData(sortingData);
     }
 
+    async function handleFilter(chosenRegion: string) {
+        if (chosenRegion === "All") {
+            setCountriesData(savedData);
+        } else {
+            let filteredData = savedData.filter(country => {
+                return country["region"] === chosenRegion
+            })
+            setCountriesData(filteredData);
+        }
+    }
+
     return (
         <div className={classes["countries-content"]}>
             <div className={classes["countries-actions"]}>
                 <button onClick={handleSortingByName}>Sort by Name</button>
                 <button onClick={handleSortingByRegion}>Sort by Region</button>
                 <button onClick={handleSortingByPopulation}>Sort by Population</button>
+                <button onClick={() => handleFilter("Africa")}>Filter by region</button>
+                <label htmlFor="regionFilter">Filter by Region</label>
+                <select name="regionFilter" id="regionFilter" onChange={(e) => handleFilter(e.target.value)}>
+                    <option value={"All"}>All</option>
+                    <option value={"Africa"}>Africa</option>
+                    <option value={"Americas"}>Americas</option>
+                    <option value={"Antarctic"}>Antarctic</option>
+                    <option value={"Asia"}>Asia</option>
+                    <option value={"Europe"}>Europe</option>
+                    <option value={"Oceania"}>Oceania</option>
+                </select>
             </div>
             <div className={classes["countries-table"]}>
                 <table>
