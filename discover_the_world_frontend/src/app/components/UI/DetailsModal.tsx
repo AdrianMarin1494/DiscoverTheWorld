@@ -23,7 +23,7 @@ const DetailsModal: React.FC<DetailsModalInterface> = ({countryName, onClose, se
             </div>
             <div className={classes["details"]}>
                 <p>UN Member: {{countryUnMember} ? "Yes" : "No"}</p>
-                <p>{countryArea}</p>
+                <p>Country Area: {countryArea}</p>
             </div>
             <div className={classes["actions"]}>
                 <button onClick={onClose}>Close</button>

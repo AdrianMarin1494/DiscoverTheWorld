@@ -96,7 +96,7 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
         setCountriesData(sortingData);
     }
 
-    async function handleFilter(chosenRegion: string) {
+    function handleFilterByRegion(chosenRegion: string) {
         if (chosenRegion === "All") {
             setCountriesData(savedData);
         } else {
@@ -107,22 +107,55 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
         }
     }
 
+    function handleFilterBySubregion(chosenRegion: string) {
+        if (chosenRegion === "All") {
+            setCountriesData(savedData);
+        } else {
+            let filteredData = savedData.filter(country => {
+                return country["subregion"] === chosenRegion
+            })
+            setCountriesData(filteredData);
+        }
+    }
+
+    let regions: string[] = [];
+    savedData.map(country => {
+        if (regions.indexOf(country["region"]) === -1) {
+            regions.push(country["region"])
+        }
+    })
+    regions = regions.sort();
+    const regionsOptions = regions.map((region) => {
+        return <option value={region}>{region}</option>
+    })
+
+    let subregions: string[] = [];
+    countriesData.map(country => {
+        if (subregions.indexOf(country["subregion"]) === -1) {
+            subregions.push(country["subregion"])
+        }
+    })
+    subregions = subregions.sort();
+    const subregionsOptions = subregions.map((region) => {
+        return <option value={region}>{region}</option>
+    })
+    console.log(subregions);
+
     return (
         <div className={classes["countries-content"]}>
             <div className={classes["countries-actions"]}>
                 <button onClick={handleSortingByName}>Sort by Name</button>
                 <button onClick={handleSortingByRegion}>Sort by Region</button>
                 <button onClick={handleSortingByPopulation}>Sort by Population</button>
-                <button onClick={() => handleFilter("Africa")}>Filter by region</button>
                 <label htmlFor="regionFilter">Filter by Region</label>
-                <select name="regionFilter" id="regionFilter" onChange={(e) => handleFilter(e.target.value)}>
+                <select name="regionFilter" id="regionFilter" onChange={(e) => handleFilterByRegion(e.target.value)}>
                     <option value={"All"}>All</option>
-                    <option value={"Africa"}>Africa</option>
-                    <option value={"Americas"}>Americas</option>
-                    <option value={"Antarctic"}>Antarctic</option>
-                    <option value={"Asia"}>Asia</option>
-                    <option value={"Europe"}>Europe</option>
-                    <option value={"Oceania"}>Oceania</option>
+                    {regionsOptions}
+                </select>
+                <label htmlFor="subregionFilter">Filter by Subegion</label>
+                <select name="subregionFilter" id="subregionFilter" onChange={(e) => handleFilterBySubregion(e.target.value)}>
+                    <option value={"All"}>All</option>
+                    {subregionsOptions}
                 </select>
             </div>
             <div className={classes["countries-table"]}>
