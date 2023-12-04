@@ -107,15 +107,24 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
         }
     }
 
-    function handleFilterBySubregion(chosenRegion: string) {
-        if (chosenRegion === "All") {
+    function handleFilterBySubregion(chosenSubregion: string) {
+        if (chosenSubregion === "All") {
             setCountriesData(savedData);
         } else {
             let filteredData = savedData.filter(country => {
-                return country["subregion"] === chosenRegion
+                return country["subregion"] === chosenSubregion
             })
             setCountriesData(filteredData);
         }
+    }
+
+    function handleFilterByPopulation(chosenPopulationNumber: string) {
+        let intChosenPopulationNumber = Number(chosenPopulationNumber);
+        let filteredData = savedData.filter(country => {
+            return country["population"] >= intChosenPopulationNumber;
+        });
+        setCountriesData(filteredData);
+
     }
 
     let regions: string[] = [];
@@ -139,7 +148,6 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
     const subregionsOptions = subregions.map((region) => {
         return <option value={region}>{region}</option>
     })
-    console.log(subregions);
 
     return (
         <div className={classes["countries-content"]}>
@@ -157,6 +165,8 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
                     <option value={"All"}>All</option>
                     {subregionsOptions}
                 </select>
+                <label htmlFor="populationFilter">Filter by Population(higher then)</label>
+                <input name="populationFilter" id="populationFilter" onChange={(e) => {handleFilterByPopulation(e.target.value)}}/>
             </div>
             <div className={classes["countries-table"]}>
                 <table>
