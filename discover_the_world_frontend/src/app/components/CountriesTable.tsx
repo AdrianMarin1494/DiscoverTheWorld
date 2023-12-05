@@ -47,6 +47,13 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
         );
     }
 
+    function searchCountry(countryName: string) {
+        let filteredData = savedData.filter(country => {
+            return country["name"]["common"].includes(countryName);
+        });
+        setCountriesData(filteredData);
+    }
+
     function handleSortingByName() {
         let sortingData = countriesData.sort((a, b) => {
             const nameA = a["name"]["common"].toUpperCase();
@@ -124,7 +131,6 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
             return country["population"] >= intChosenPopulationNumber;
         });
         setCountriesData(filteredData);
-
     }
 
     let regions: string[] = [];
@@ -152,6 +158,7 @@ const CountriesTable: React.FC<CountriesTableProps> = ({onSelectedRow}) => {
     return (
         <div className={classes["countries-content"]}>
             <div className={classes["countries-actions"]}>
+                <input name="searchCountry" id="searchCountry" placeholder="Search Country" onChange={(e) => {searchCountry(e.target.value)}}/>
                 <button onClick={handleSortingByName}>Sort by Name</button>
                 <button onClick={handleSortingByRegion}>Sort by Region</button>
                 <button onClick={handleSortingByPopulation}>Sort by Population</button>
