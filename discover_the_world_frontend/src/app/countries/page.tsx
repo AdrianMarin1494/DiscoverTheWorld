@@ -1,13 +1,14 @@
 "use client";
 
 import React, {useState} from "react";
+import Link from "next/link";
 
-import CountriesTable from "../CountriesTable";
-import DetailsModal from "../UI/DetailsModal";
+import CountriesTable from "../components/CountriesTable";
+import DetailsModal from "../components/UI/DetailsModal";
 
 import classes from "./MainPage.module.css";
 
-const MainPage = () => {
+const Countries = () => {
     const [isShowingModal, setIsShowingModal] = useState<boolean>(false);
     const [selectedCountryName, setSelectedCountryName] = useState<string>("");
     const [selectedCountryMap, setSelectedCountryMap] = useState<string>("");
@@ -31,6 +32,9 @@ const MainPage = () => {
     return (
         <div className={classes["main-page"]}>
             <h3 className={classes["title"]}>Discover the Countries</h3>
+            <Link href="/">
+                <span>Home</span>
+            </Link>
             <CountriesTable onSelectedRow={handleSelectedRow}/>
             {isShowingModal && <DetailsModal 
                 countryName={selectedCountryName} 
@@ -44,4 +48,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default Countries;

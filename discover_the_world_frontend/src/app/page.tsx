@@ -1,15 +1,20 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
-import MainPage from "./components/pages/MainPage";
 import styles from './page.module.css'
 
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <MainPage />
+      <h3>Discover the World</h3>
+      <div>
+        <Link href="/countries">
+          <span>Countries</span>
+        </Link>
+      </div>
     </main>
   )
 }
