@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 interface PhotosInterface {
     copyright: string,
@@ -87,8 +88,11 @@ const Universe: React.FC = () => {
     }
     
     return (
-        <div>
+        <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
             <h3>Enjoy the Astronomy</h3>
+            <Link href="/">
+                <span>Home</span>
+            </Link>
             {isLoading ? 
                 <div>
                     <h3>Loading...</h3>
@@ -97,9 +101,9 @@ const Universe: React.FC = () => {
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
                     {photos.map((photo) => {
                         return (
-                            <div key={photo.title}>
+                            <div key={photo.title} style={{padding: "15px"}}>
                                 <h3>{photo.title}</h3>
-                                <h4>By: {photo.copyright}</h4>
+                                <h4>Credits: {photo.copyright}</h4>
                                 <h5><i>{photo.date}</i></h5>
                                 <img src={photo.url} style={{width: "60vw", height: "60vh"}}/>
                                 <p style={{width: "60vw"}}>{photo.explanation}</p>

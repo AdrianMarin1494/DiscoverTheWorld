@@ -12,7 +12,10 @@ export default function Home() {
       <h3>Discover the World</h3>
       <div>
         <Link href="/countries">
-          <span>Countries</span>
+          <span>Discover the Countries</span>
+        </Link>
+        <Link href="/astronomy">
+          <span>Enjoy the Astronomy</span>
         </Link>
       </div>
     </main>
